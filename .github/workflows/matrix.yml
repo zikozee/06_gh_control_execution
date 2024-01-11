@@ -2,6 +2,7 @@ name: Matrix Demo
 on: push
 jobs:
   build:
+    continue-on-error: true
     # the idea behind matrix is that it helps run job with different values or parameters
     # usage say you wanna test performance on different os or if testing environment is different from prod
     strategy:
