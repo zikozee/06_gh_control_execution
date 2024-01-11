@@ -33,8 +33,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Test code
+        # we add an id here to be able to reference the Test code step
+        id: run-tests
         run: npm run test
       - name: Upload test report
+        # if: ${{ steps.run-tests }} we can also use interpolation
+        # https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context   to see what we can do with steps
+        # e.g steps.<id>.outcome , steps.<id>.conclusion
+        if: steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test-report
