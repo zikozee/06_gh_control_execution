@@ -13,7 +13,7 @@ jobs:
         # standalone - included single combinations
         include:
           - node-version: 18
-            operating-system: ubuntu:latest
+            operating-system: ubuntu-latest
             npm: 6
           # standalone - excluded single combinations
         exclude:
