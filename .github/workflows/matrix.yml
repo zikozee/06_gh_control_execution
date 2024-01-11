@@ -2,7 +2,7 @@ name: Matrix Demo
 on: push
 jobs:
   build:
-    # the idea behind matrix is that it helps run job with different values data
+    # the idea behind matrix is that it helps run job with different values or parameters
     # usage say you wanna test performance on different os or if testing environment is different from prod
     strategy:
       matrix:
