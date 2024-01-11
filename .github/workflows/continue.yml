@@ -36,18 +36,11 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test code
-        # we add an id here to be able to reference the Test code step
+        # alternative to checking within Upload test report (see execution-flow.yml)
+        continue-on-error: true
         id: run-tests
         run: npm run test
       - name: Upload test report
-        # if: ${{ steps.run-tests }} we can also use interpolation
-        # https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context   to see what we can do with steps
-        # e.g steps.<id>.outcome , steps.<id>.conclusion
-        # failure()  -->>  returns true when any previous Step or Job failed
-        # success()  -->> returns true when none of the previous steps have failed
-        # always()  -->> always returns true so the Job or step always execute
-        # cancelled() -->> returns true if the workflow has been cancelled
-        if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test-report
