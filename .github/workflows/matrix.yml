@@ -5,10 +5,20 @@ jobs:
     continue-on-error: true
     # the idea behind matrix is that it helps run job with different values or parameters
     # usage say you wanna test performance on different os or if testing environment is different from prod
+    # in this case 12:ubuntu-latest, 12: windows-latest, 14:ubuntu-latest, 14: windows-latest, 16:ubuntu-latest, 16: windows-latest,
     strategy:
       matrix:
         node-version: [12, 14, 16]
         operating-system: [ubuntu-latest, windows-latest]
+        # standalone - included single combinations
+        include:
+          - node-version: 18
+            operating-system: ubuntu:latest
+            npm: 6
+          # standalone - excluded single combinations
+        exclude:
+          - node-version: 12
+            operating-system: windows:latest
     runs-on: ${{ matrix.operating-system }}
     steps:
       - name: Get Code
