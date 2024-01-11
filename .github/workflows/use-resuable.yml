@@ -70,6 +70,8 @@ jobs:
     needs: build
     # we could define a full path to another repository
     uses: ./.github/workflows/resuable.yml
+    with:
+      artifact-name: dist-files
   report:
     needs: [lint, deploy] # ensure its waits on other Jobs else its parallel
     ## this will only run if any job fails
