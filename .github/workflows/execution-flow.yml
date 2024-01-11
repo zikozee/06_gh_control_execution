@@ -84,6 +84,7 @@ jobs:
       - name: Deploy
         run: echo "Deploying..."
   report:
+    needs: [lint, deploy] # ensure its waits on other Jobs else its parallel
     ## this will only run if any job fails
     if: failure()
     runs-on: ubuntu-latest
