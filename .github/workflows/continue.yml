@@ -37,6 +37,8 @@ jobs:
         run: npm ci
       - name: Test code
         # alternative to checking within Upload test report (see execution-flow.yml)
+        # this treats the steps as passed
+        # use continue-on-error if you want a success regardless
         continue-on-error: true
         id: run-tests
         run: npm run test

@@ -1,0 +1,22 @@
+name: Matrix Demo
+on: push
+jobs:
+  build:
+    # the idea behind matrix is that it helps run job with different values data
+    # usage say you wanna test performance on different os or if testing environment is different from prod
+    strategy:
+      matrix:
+        node-version: [12, 14, 16]
+        operating-system: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.operating-system }}
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Install NodeJs
+        uses:  actions/setup-node@v3
+        with:
+         node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Project
+        run: npm run build
